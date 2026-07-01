@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "../App.module.css";
 
-function Display() {
+function Display({ calVal }) {
   return (
     <>
-      <input type="text" className={styles.display} />
+      <input type="text" className={styles.display} value={calVal} readOnly />
     </>
   );
 }

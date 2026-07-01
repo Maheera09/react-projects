@@ -1,12 +1,16 @@
-import React from "react";
 import TodoItem from "./TodoItem";
 
-function TodoItems({ todoItems }) {
+function TodoItems({ todoItems, handleDeleteItem }) {
   return (
     <>
       <div className="items-container">
         {todoItems.map((item) => (
-          <tTodoItem odoName={item.name} todoDate={item.duedate} />
+          <TodoItem
+            key={item.name}
+            todoName={item.name}
+            todoDate={item.duedate}
+            handleDeleteClick={handleDeleteItem}
+          />
         ))}
       </div>
     </>
