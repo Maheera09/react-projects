@@ -1,53 +1,59 @@
-import React, { useState } from "react";
+import { useRef } from "react";
 
 function AddTodo({ onNewItem }) {
-  const [todoName, setTodoName] = useState("");
-  const [todoDate, setTodoDate] = useState("");
-  const handleNameChange = (e) => {
-    setTodoName(e.target.value);
-  };
-  const handleDateChange = (e) => {
-    setTodoDate(e.target.value);
-  };
-  const handleAddButton = () => {
+  // const [todoName, setTodoName] = useState("");
+  // const [todoDate, setTodoDate] = useState("");
+  const todoNameElement = useRef(0);
+  const todoDateElement = useRef(0);
+
+  // const handleNameChange = (e) => {
+  //   setTodoName(e.target.value);
+  // };
+  //Not needed after using ref hook
+  // const handleDateChange = (e) => {
+  //   setTodoDate(e.target.value);
+  // };
+
+  const handleAddButton = (e) => {
+    e.preventDefault();
+    const todoName = todoNameElement.current.value;
+    const todoDate = todoDateElement.current.value;
     onNewItem(todoName, todoDate);
-    setTodoDate("");
-    setTodoName("");
+    todoNameElement.current.value = "";
+    todoDateElement.current.value = "";
+    // setTodoDate("");
+    // setTodoName("");
+    //Not needed after using ref hook
   };
+
   return (
     <div>
       <center className="todo-container">
         <div className="container ">
           {/* --------- */}
-          <div className="row kg-row">
+          <form onSubmit={handleAddButton} className="row kg-row">
             <div className="col-6">
               <input
                 placeholder="Enter task"
-                value={todoName}
-                onChange={handleNameChange}
+                ref={todoNameElement}
+                // onChange={handleNameChange}
               ></input>
             </div>
             <div className="col-4">
               <input
                 type="date"
                 name=""
+                ref={todoDateElement}
                 id=""
-                value={todoDate}
-                onChange={handleDateChange}
+                // onChange={handleDateChange}
               />
             </div>
             <div className="col-2">
-              <button
-                type="button"
-                onClick={() => {
-                  handleAddButton();
-                }}
-                className="btn btn-success kg-button"
-              >
+              <button type="submit" className="btn btn-success kg-button">
                 Add
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </center>
     </div>

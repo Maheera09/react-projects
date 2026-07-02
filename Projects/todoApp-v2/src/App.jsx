@@ -11,16 +11,19 @@ function App() {
   const [todoItems, setToDoItems] = useState(initial);
 
   const handleNewItem = (itemName, itemDate) => {
-    console.log(`${itemName} & ${itemDate}`);
-    const newTodoItems = [...todoItems, { name: itemName, duedate: itemDate }];
-    setToDoItems(newTodoItems);
+    setToDoItems((currentVal) => {
+      const newTodoItems = [
+        ...currentVal,
+        { name: itemName, duedate: itemDate },
+      ];
+      return newTodoItems;
+    });
   };
 
   const handleDeleteItem = (itemName) => {
     const newTodoItem = todoItems.filter((item) => item.name !== itemName);
     setToDoItems(newTodoItem);
   };
-
 
   return (
     <div>
@@ -34,6 +37,6 @@ function App() {
       </center>
     </div>
   );
-  };
+}
 
 export default App;
