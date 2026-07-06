@@ -4,6 +4,7 @@ import { createContext } from "react";
 export const PostListContext = createContext({
   postList: [],
   addPost: () => {},
+  addInitialPosts: () => {},
   deletePost: () => {},
   //this is called API designing or contract designing
 });
@@ -16,6 +17,8 @@ const postListReducer = (currentPostList, action) => {
     });
   } else if (action.type === "ADD_POST") {
     newPostList = [action.payload, ...currentPostList];
+  } else if (action.type === "ADD_INITIAL_POSTS") {
+    newPostList = action.payload.posts;
   }
   return newPostList;
 };
@@ -37,6 +40,15 @@ export const PostListProvider = ({ children }) => {
     });
   };
 
+  const addInitialPosts = (posts) => {
+    dispatchPostList({
+      type: "ADD_INITIAL_POSTS",
+      payload: {
+        posts,
+      },
+    });
+  };
+
   const deletePost = (id) => {
     dispatchPostList({
       type: "DELETE_POST",
@@ -46,7 +58,9 @@ export const PostListProvider = ({ children }) => {
     });
   };
   return (
-    <PostListContext.Provider value={{ postList, addPost, deletePost }}>
+    <PostListContext.Provider
+      value={{ postList, addPost, deletePost, addInitialPosts }}
+    >
       {children}
     </PostListContext.Provider>
   );

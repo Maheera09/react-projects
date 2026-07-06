@@ -21,13 +21,17 @@ function Post({ post }) {
             </span>
           </h5>
           <p className="card-text">{post.body}</p>
-          {post.tags.map((tag) => (
+          {post.tags?.map((tag) => (
             <span className="badge text-bg-primary hashtag" key={tag}>
               {tag}
             </span>
           ))}
           <div className="alert alert-success reactions" role="alert">
-            This post has {post.reactions} reactions
+            This post has{" "}
+            {typeof post.reactions === "object"
+              ? post.reactions.likes + post.reactions.dislikes
+              : post.reactions}{" "}
+            reactions
           </div>
         </div>
       </div>
