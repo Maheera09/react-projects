@@ -18,13 +18,25 @@ function CreatePost() {
     const postreactions = postreactionsElement.current.value;
     const posttags = posttagsElement.current.value.split(" ");
 
-    addPost(userid, posttitle, postbody, postreactions, posttags);
-
     useridElement.current.value = "";
     posttitleElement.current.value = "";
     postbodyElement.current.value = "";
     postreactionsElement.current.value = "";
     posttagsElement.current.value = "";
+
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: posttitle,
+        body: postbody,
+        reactions: postreactions,
+        userId: userid,
+        tags: posttags,
+      }),
+    })
+      .then((res) => res.json())
+      .then((resObj) => addPost(resObj));
   };
 
   return (
