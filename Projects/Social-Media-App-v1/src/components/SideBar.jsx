@@ -1,7 +1,8 @@
 import React from "react";
 import { PiBookOpenFill } from "react-icons/pi";
+import { Link, useNavigate } from "react-router-dom";
 
-function SideBar({ selectedTab, setSelectedTab }) {
+function SideBar() {
   return (
     <>
       <div
@@ -27,12 +28,8 @@ function SideBar({ selectedTab, setSelectedTab }) {
         <hr />
 
         <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item" onClick={() => setSelectedTab("Home")}>
-            <a
-              href="#"
-              className={`nav-link text-white ${selectedTab === "Home" && "active"}`}
-              aria-current="page"
-            >
+          <li className="nav-item">
+            <Link to="/" className="nav-link text-white" aria-current="page">
               <svg
                 className="bi pe-none me-2"
                 width="16"
@@ -42,14 +39,11 @@ function SideBar({ selectedTab, setSelectedTab }) {
                 <use xlinkHref="#home"></use>
               </svg>
               Home
-            </a>
+            </Link>
           </li>
 
-          <li onClick={() => setSelectedTab("Create Post")}>
-            <a
-              href="#"
-              className={`nav-link text-white ${selectedTab === "Create Post" && "active"}`}
-            >
+          <li>
+            <Link to="/create-post" className="nav-link text-white">
               <svg
                 className="bi pe-none me-2"
                 width="16"
@@ -59,7 +53,7 @@ function SideBar({ selectedTab, setSelectedTab }) {
                 <use xlinkHref="#speedometer2"></use>
               </svg>
               Create Post
-            </a>
+            </Link>
           </li>
         </ul>
 
